@@ -45,15 +45,15 @@ public class FileParser {
 
 		// Test a path that exists with only valid files
 
-		String folder_base = "C:/Users/zhuofu/workspace/apacheCommonMath3.1.1/";
-		String logging_dir = "TestParser/Data5";
+		String folder_base = "C:/Users/zhuofu/workspace4/apacheCommonMath3.1.1/";
+		String logging_dir = "TestParser/Data10";
 		logger.setDir(logging_dir);// set the logging directory
 
 		// FileInputStream in = new
 		// FileInputStream("C:/Users/zhuofu/workspace/apacheCommonMath3.1.1/src/experiments/FastCosineTransformer_bug.java");
 		String rootPath = folder_base
-				+ "src/org/apache/commons/math3/linear/";
-		String fileName = "BlockRealMatrix_bug5.java";//"BOBYQAOptimizer_bug.java";
+				+ "src/org/apache/commons/math3/geometry/euclidean/threed/";
+		String fileName = "Rotation_bug.java";//"BOBYQAOptimizer_bug.java";
 		System.out.println("file exist");
 		sourceParser.addFile(rootPath, fileName);
 		HashMap<Integer, List<BasicExpression>> mMap = new HashMap<Integer, List<BasicExpression>>();
@@ -112,8 +112,11 @@ public class FileParser {
 				}
 
 			}
-
-			parse(fileName, mMap);
+			try{
+			parse(fileName, mMap);}
+			catch( java.lang.IndexOutOfBoundsException e){
+				System.out.println("file "+i+" got problem");
+			}
 
 			System.out.println("finish parsing test case " + i);
 			mMap.clear();
@@ -134,7 +137,9 @@ public class FileParser {
 			String[] terms = scurrentLine.split("\t");
 			int lineNum = getLineNumber(terms[0]);
 			String lineType = getLineType(terms[1]);
-
+			if(terms.length >= 3)
+			{if(terms[2].contains("1.201878699"))
+				{System.out.println("stop");}}
 			if (lineType.compareTo("callExit") == 0) {
 				return;
 			} else if (lineType.compareTo("funcEnter") == 0) {
@@ -164,6 +169,8 @@ public class FileParser {
 					scurrentLine = list.get(i);
 					terms = scurrentLine.split("\t");
 					lineNum = getLineNumber(terms[0]);
+					if(lineNum==246)
+					{System.out.println("stop");}
 					lineType = getLineType(terms[1]);
 					if (lineNum != currentLineNum) {
 						if (mlineList != null) {
@@ -179,9 +186,10 @@ public class FileParser {
 					mNode = new BasicExpression(terms);
 					mlineList.add(mNode);
 				}
+				list.clear();
 				if (mlineList != null) {
-
 					mMap.put(currentLineNum, mlineList);
+					mlineList=null;
 				}
 			} else if (lineType.compareTo("normal") == 0) {
 				list.add(scurrentLine);// add current binary expression line to
@@ -260,7 +268,7 @@ public class FileParser {
 		List<SubExpression> subExpListcopy;
 		List<BasicExpression> mlineList;
 		for (int key : mMap.keySet()) {
-			if(key==787){
+			if(key==246){
 				System.out.println("787");
 			}
 			if (key < 0) {

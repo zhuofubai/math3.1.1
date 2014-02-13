@@ -51,7 +51,12 @@ public class BasicExpression {
 		String tmp=c.substring(1,c.length()-1);
 		String[] cvs=tmp.split(",");
 		for(int i=0;i<cvs.length;i++){
-			this.covarList.add(Double.parseDouble(cvs[i]));
+			if(cvs[i].compareTo("false")==0){
+				this.covarList.add(0.0);
+			}else if(cvs[i].compareTo("true")==0){
+				this.covarList.add(1.0);
+			}else{
+			this.covarList.add(Double.parseDouble(cvs[i]));}
 		}
 	}
 	public void setOp(String op){

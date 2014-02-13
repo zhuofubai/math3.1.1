@@ -50,20 +50,20 @@ public class Bug_insert {
 
 		// Test a path that exists with only valid files
 
-		String folder_base = "C:/Users/zhuofu/workspace/apacheCommonMath3.1.1/";
+		String folder_base = "C:/Users/zhuofu/workspace2/apacheCommonMath3.1.1/";
 
 		// FileInputStream in = new
 		// FileInputStream("C:/Users/zhuofu/workspace/apacheCommonMath3.1.1/src/experiments/FastCosineTransformer_bug.java");
 		String rootPath = folder_base
-				+ "src/org/apache/commons/math3/linear/";// "src/experiments";
-		String fileName = "BlockRealMatrix_bug2.java";// "FastCosineTransformer_bug2.java";
-		System.out.println("file exist");
+				+ "src/org/apache/commons/math3/geometry/euclidean/threed/";;// "src/experiments";
+		String fileName = "Vector3D_bug1.java";// "FastCosineTransformer_bug2.java";
+		//System.out.println("file exist");
 		sourceParser.addFile(rootPath, fileName);
 
 		/** start mutation testing */
 		/** First select an operation */
 		int operation = selectMutation();
-		operation = 4;
+		operation = 1;
 		switch (operation) {
 
 		case 1:
@@ -75,8 +75,8 @@ public class Bug_insert {
 		case 3:
 			switchOp();
 			break;
-		case 4:
-			changeConstant();
+//		case 4:
+//			changeConstant();
 			//break;
 
 		}

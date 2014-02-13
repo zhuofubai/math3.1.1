@@ -77,7 +77,7 @@ public class Main {
 						String[] ignoredClasses = new String[] {
 								"edu/cwru/eecs/gang/faultlocalization/expressionvalue",
 								"org/apache/commons/math3/util/ArithmeticUtils",
-								"org/apache/commons/math3/util/MathArrays",
+								//"org/apache/commons/math3/util/MathArrays",
 								"org/apache/commons/math3/transform/TransformUtils",
 								"org/" };
 						for (String ignoredClass : ignoredClasses)
@@ -87,8 +87,7 @@ public class Main {
 							}
 						// ----------------------------------------------------------------
 						String[] profiledClasses = new String[] { //"BOBYQAOptimizer_bug"// ,
-																	//					"DSCompiler_bug"
-								"BlockRealMatrix_bug"
+																"Rotation_bug"
 						};
 						for (String profiledClass : profiledClasses)
 							if (inClassFile.contains(profiledClass)) {
